@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:english_words/english_words.dart';
 
 void main() => runApp(MyApp());
 
@@ -35,24 +36,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
+    final wordPair = WordPair.random();
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Welcom to Nothing and Quantum"),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
+        child: Text(wordPair.asPascalCase),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
