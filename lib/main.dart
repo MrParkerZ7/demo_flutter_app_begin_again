@@ -73,11 +73,37 @@ class RandomWordsState extends State<RandomWords> {
       );
     }
 
+    void _setting() {
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) {
+            return Scaffold(
+              appBar: AppBar(
+                title: Text('Saved Suggestions'),
+              ),
+              body: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("All save : "),
+                    Text(_saved.toString()),
+                    IconButton(icon: Icon(Icons.list), onPressed: _setting),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Startup Name Generator'),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
+          IconButton(icon: Icon(Icons.settings), onPressed: _setting),
         ],
       ),
       body: _buildSuggestions(),
