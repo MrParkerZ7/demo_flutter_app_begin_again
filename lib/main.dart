@@ -73,6 +73,16 @@ class RandomWordsState extends State<RandomWords> {
       );
     }
 
+    void _endPage() {
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) {
+            return Center(child: Text("Ended"),);
+          },
+        ),
+      );
+    }
+
     void _setting() {
       Navigator.of(context).push(
         MaterialPageRoute<void>(
@@ -89,6 +99,7 @@ class RandomWordsState extends State<RandomWords> {
                     Text("All save : "),
                     Text(_saved.toString()),
                     IconButton(icon: Icon(Icons.list), onPressed: _setting),
+                    IconButton(icon: Icon(Icons.delete), onPressed: _endPage),
                   ],
                 ),
               ),
