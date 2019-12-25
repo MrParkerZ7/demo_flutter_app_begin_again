@@ -58,14 +58,18 @@ class DemoListViewBuilder extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: ListView.builder(
+          child: ListView.separated(
               padding: const EdgeInsets.all(8),
               itemCount: entries.length,
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(),
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   height: 50,
                   color: Colors.amber[colorCodes[index]],
-                  child: Center(child: Text('Entry ${entries[index]}')),
+                  child: Center(
+                      child: Text(
+                          'Entry : ${entries[index]} | color code : ${colorCodes[index]}')),
                 );
               }),
         ),
