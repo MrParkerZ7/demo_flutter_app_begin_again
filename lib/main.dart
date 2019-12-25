@@ -78,6 +78,63 @@ class DemoListViewBuilder extends StatelessWidget {
   }
 }
 
+class DemoListView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Demo navigate page"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: ListView(
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(20.0),
+            children: <Widget>[
+              const Text('I\'m dedicating every day to you'),
+              const Text('Domestic life was never quite my style'),
+              const Text('When you smile, you knock me out, I fall apart'),
+              const Text('And I thought I was so smart'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class DemoCustomScoreListView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Demo navigate page"),
+      ),
+      body: CustomScrollView(
+        shrinkWrap: true,
+        slivers: <Widget>[
+          SliverPadding(
+            padding: const EdgeInsets.all(20.0),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate(
+                <Widget>[
+                  const Text('I\'m dedicating every day to you'),
+                  const Text('Domestic life was never quite my style'),
+                  const Text('When you smile, you knock me out, I fall apart'),
+                  const Text('And I thought I was so smart'),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
@@ -112,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: const Center(child: Text('Entry C')),
           ),
           RaisedButton(
-            child: Text('Demo route'),
+            child: Text('Route & PopBack'),
             onPressed: () {
               Navigator.push(
                 context,
@@ -121,11 +178,30 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           ),
           RaisedButton(
-            child: Text('Demo list view builder'),
+            child: Text('ListViewBuilder'),
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => DemoListViewBuilder()),
+              );
+            },
+          ),
+          RaisedButton(
+            child: Text('ListView'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DemoListView()),
+              );
+            },
+          ),
+          RaisedButton(
+            child: Text('ScrollListViewBuilder'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DemoCustomScoreListView()),
               );
             },
           ),
