@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
   final String title;
 
   @override
@@ -66,6 +65,69 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     }
 
+    void _setting() {
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) {
+            return Scaffold(
+              appBar: AppBar(
+                title: Text('Saved Suggestions'),
+              ),
+              body: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("All save : "),
+                    IconButton(icon: Icon(Icons.list), onPressed: _setting),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    }
+
+    Future<void> _DemoDialogNavigator() async {
+      _incrementCounter();
+
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('How you want to navigate'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  FlatButton(
+                    child: Text('Navigate'),
+                    onPressed: _setting,
+                  ),
+                  FlatButton(
+                    child: Text('Navigate close dialog'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      _setting();
+                    },
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Close'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -75,6 +137,12 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Text('Make a regret'),
           onPressed: () {
             _neverSatisfied();
+          },
+        ),
+        RaisedButton(
+          child: Text('Open dialog scafful'),
+          onPressed: () {
+            _DemoDialogNavigator();
           },
         ),
       ]),
