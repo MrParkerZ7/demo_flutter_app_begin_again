@@ -63,8 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     validator: (value) {
                       if (value.isEmpty) return 'Please enter some text';
-                      print(_formKey);
-                      print(_formKey.currentState);
+                      print(value);
                       return null;
                     },
                   ),
