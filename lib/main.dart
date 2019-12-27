@@ -23,8 +23,13 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+enum Answers { MONEY, GAME, NOTHING }
+
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String _value = 'Nothing!';
+
+  void _setValue(String value) => setState(() => _value = value);
 
   void _incrementCounter() {
     setState(() {
@@ -89,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     }
 
-    Future<void> _DemoDialogNavigator() async {
+    Future<void> _demoDialogNavigator() async {
       _incrementCounter();
 
       return showDialog<void>(
@@ -128,11 +133,82 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     }
 
+    Future<void> _demoAlertDialog() async {
+      _incrementCounter();
+
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('How you want to navigate'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text("Beware!!"),
+                  Text("Don't touch this button again!!"),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    Future<void> _demoSimpleDialog() async {
+      switch (await showDialog(
+          context: context,
+          child: new SimpleDialog(
+            title: new Text("Do you like ?"),
+            children: <Widget>[
+              new SimpleDialogOption(
+                child: new Text("Money"),
+                onPressed: () {
+                  Navigator.pop(context, Answers.MONEY);
+                },
+              ),
+              new SimpleDialogOption(
+                child: new Text("Game"),
+                onPressed: () {
+                  Navigator.pop(context, Answers.GAME);
+                },
+              ),
+              new SimpleDialogOption(
+                child: new Text("Nothing!"),
+                onPressed: () {
+                  Navigator.pop(context, Answers.NOTHING);
+                },
+              )
+            ],
+          ))) {
+        case Answers.MONEY:
+          _setValue('MONEY');
+          break;
+        case Answers.GAME:
+          _setValue("GAME");
+          break;
+        case Answers.NOTHING:
+          _setValue("NOTHING");
+          break;
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: ListView(padding: const EdgeInsets.all(8), children: <Widget>[
+        Center(
+            child: Text("Here is what we had '$_value'",
+                textAlign: TextAlign.center)),
         RaisedButton(
           child: Text('Make a regret'),
           onPressed: () {
@@ -140,9 +216,21 @@ class _MyHomePageState extends State<MyHomePage> {
           },
         ),
         RaisedButton(
-          child: Text('Open dialog scafful'),
+          child: Text('Open dialog with navigator'),
           onPressed: () {
-            _DemoDialogNavigator();
+            _demoDialogNavigator();
+          },
+        ),
+        RaisedButton(
+          child: Text('Open simple dialog'),
+          onPressed: () {
+            _demoSimpleDialog();
+          },
+        ),
+        RaisedButton(
+          child: Text('Open alert dialog'),
+          onPressed: () {
+            _demoAlertDialog();
           },
         ),
       ]),
