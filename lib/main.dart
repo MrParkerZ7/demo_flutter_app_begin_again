@@ -31,6 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
     setState(() {
       _counter++;
+      _text = "Your Details:\n";
     });
   }
 
@@ -98,7 +99,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         hintText: 'Enter your phone number',
                       ),
                       validator: (value) {
-                        if (value.isEmpty) return 'Please enter your phone number';
+                        if (value.isEmpty)
+                          return 'Please enter your phone number';
                         print(value);
                         setState(() {
                           _text += "Phone number: $value\n";
