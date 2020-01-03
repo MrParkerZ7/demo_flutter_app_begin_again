@@ -26,6 +26,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String _text = "Your Details:\n";
 
   void _incrementCounter() {
     setState(() {
@@ -52,35 +53,74 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.display1,
             ),
-            Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      hintText: 'Enter your email',
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) return 'Please enter some text';
-                      print(value);
-                      return null;
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: RaisedButton(
-                      onPressed: () {
-                        // Validate will return true if the form is valid, or false if
-                        // the form is invalid.
-                        if (_formKey.currentState.validate()) {
-                          // Process data.
-                        }
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: Text(
+                _text,
+                style: Theme.of(context).textTheme.display1,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: 'Enter your username',
+                      ),
+                      validator: (value) {
+                        if (value.isEmpty) return 'Please enter your username';
+                        print(value);
+                        setState(() {
+                          _text += "Username: $value\n";
+                        });
+                        return null;
                       },
-                      child: Text('Submit'),
                     ),
-                  ),
-                ],
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: 'Enter your email',
+                      ),
+                      validator: (value) {
+                        if (value.isEmpty) return 'Please enter your email';
+                        print(value);
+                        setState(() {
+                          _text += "Email: $value\n";
+                        });
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: 'Enter your phone number',
+                      ),
+                      validator: (value) {
+                        if (value.isEmpty) return 'Please enter your phone number';
+                        print(value);
+                        setState(() {
+                          _text += "Phone number: $value\n";
+                        });
+                        return null;
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: RaisedButton(
+                        onPressed: () {
+                          // Validate will return true if the form is valid, or false if
+                          // the form is invalid.
+                          if (_formKey.currentState.validate()) {
+                            // Process data.
+                          }
+                        },
+                        child: Text('Submit'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
