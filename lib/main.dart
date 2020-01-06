@@ -35,7 +35,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -44,20 +43,44 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Icon(
+                  Icons.favorite,
+                  color: Colors.pink,
+                  size: 24.0,
+                  semanticLabel: 'Favorite',
+                ),
+                Icon(
+                  Icons.audiotrack,
+                  color: Colors.red,
+                  size: 24.0,
+                ),
+                Icon(
+                  Icons.unarchive,
+                  color: Colors.grey,
+                  size: 24.0,
+                ),
+                Icon(
+                  Icons.delete,
+                  color: Colors.black,
+                  size: 24.0,
+                ),
+                Icon(
+                  Icons.exit_to_app,
+                  color: Colors.yellow,
+                  size: 24.0,
+                ),
+                Icon(
+                  Icons.share,
+                  color: Colors.green,
+                  size: 24.0,
+                )
+              ],
+            )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
