@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 
 void main() => runApp(MyApp());
@@ -48,6 +49,16 @@ class _MyHomePageState extends State<MyHomePage> {
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
                   return Column(children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: const Image(
+                            image: NetworkImage(
+                                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg')),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 10),
